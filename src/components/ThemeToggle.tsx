@@ -1,22 +1,29 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useSyncExternalStore } from 'react';
 
 const themes = [
   { id: 'light', label: 'Light (Official)', description: 'Brand colors from guidelines' },
   { id: 'experimental', label: 'Experimental', description: 'Light UI with glow effects' },
 ];
 
+function subscribe(callback: () => void) {
+  window.addEventListener('clause-theme-change', callback);
+  return () => window.removeEventListener('clause-theme-change', callback);
+}
+
+function getSnapshot() {
+  return localStorage.getItem('clause-theme') || 'light';
+}
+
+function getServerSnapshot() {
+  return 'light';
+}
+
 export function ThemeToggle() {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentTheme, setCurrentTheme] = useState('light');
+  const currentTheme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const saved = localStorage.getItem('clause-theme') || 'light';
-    setCurrentTheme(saved);
-    document.documentElement.setAttribute('data-theme', saved);
-  }, []);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -29,9 +36,9 @@ export function ThemeToggle() {
   }, []);
 
   const selectTheme = (themeId: string) => {
-    setCurrentTheme(themeId);
     localStorage.setItem('clause-theme', themeId);
     document.documentElement.setAttribute('data-theme', themeId);
+    window.dispatchEvent(new Event('clause-theme-change'));
     setIsOpen(false);
   };
 

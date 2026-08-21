@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { AnimateOnScroll } from './AnimateOnScroll';
 
 const container = {
@@ -35,35 +36,19 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-[90vh] flex items-center justify-center overflow-hidden"
+      className="relative min-h-[75vh] lg:min-h-full flex items-center justify-center overflow-hidden py-16"
     >
-      <div
-        className="absolute inset-0"
-        style={{
-          background: isExperimental
-            ? 'linear-gradient(180deg, #f8fafc 0%, #ffffff 50%, #f8fafc 100%)'
-            : 'linear-gradient(135deg, #0B1224 0%, #18233D 55%, #172E4F 100%)'
-        }}
-      />
-
-      {isExperimental && (
-        <>
-          <motion.div
-            className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-[150px]"
-            style={{ background: 'rgba(99, 102, 241, 0.08)' }}
-            animate={{ scale: [1, 1.2, 1], opacity: [0.08, 0.12, 0.08] }}
-            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-          />
-          <motion.div
-            className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full blur-[120px]"
-            style={{ background: 'rgba(6, 182, 212, 0.06)' }}
-            animate={{ scale: [1, 1.3, 1], opacity: [0.06, 0.1, 0.06] }}
-            transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-          />
-        </>
+      {!isExperimental && (
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(135deg, #0B1224 0%, #18233D 55%, #172E4F 100%)'
+          }}
+        />
       )}
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
         <AnimateOnScroll direction="up" delay={0}>
           <motion.h1
             variants={container}
@@ -71,14 +56,14 @@ export function Hero() {
             animate="show"
             className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6"
           >
-            <motion.span variants={item} className="text-clause-midnight">Build </motion.span>
+            <motion.span variants={item} className={isExperimental ? 'text-clause-midnight' : 'text-white'}>Build </motion.span>
             <motion.span
               variants={item}
               className={isExperimental ? 'text-gradient' : 'text-clause-signal'}
             >
               intelligently
             </motion.span>
-            <motion.span variants={item} className="text-clause-midnight">. Operate efficiently. Grow meaningfully.</motion.span>
+            <motion.span variants={item} className={isExperimental ? 'text-clause-midnight' : 'text-white'}>. Operate efficiently. Grow meaningfully.</motion.span>
           </motion.h1>
         </AnimateOnScroll>
         
@@ -87,7 +72,7 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.4 }}
-            className="text-lg md:text-xl text-clause-steel mb-8 max-w-2xl mx-auto"
+            className={`text-lg md:text-xl mb-8 max-w-2xl mx-auto ${isExperimental ? 'text-clause-steel' : 'text-clause-cloud/80'}`}
           >
             Clause Holdings creates AI-enabled products and consulting solutions that help businesses turn complex challenges into scalable systems and measurable growth.
           </motion.p>
@@ -100,12 +85,12 @@ export function Hero() {
             transition={{ delay: 0.7, duration: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
           >
-            <button className="px-8 py-3 bg-clause-intelligence text-white rounded-lg font-medium hover:bg-clause-intelligence/90 transition-all">
+            <Link href="/contact" className="px-8 py-3 bg-clause-intelligence text-white rounded-lg font-medium hover:bg-clause-intelligence/90 transition-all">
               Start a Conversation
-            </button>
-            <button className="px-8 py-3 border border-clause-midnight text-clause-midnight rounded-lg font-medium hover:bg-clause-midnight/5 transition-all">
+            </Link>
+            <Link href="/about" className={`px-8 py-3 border rounded-lg font-medium transition-all ${isExperimental ? 'border-clause-midnight text-clause-midnight hover:bg-clause-midnight/5' : 'border-white/40 text-white hover:bg-white/10'}`}>
               Explore Clause
-            </button>
+            </Link>
           </motion.div>
         </AnimateOnScroll>
         
@@ -114,7 +99,7 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.9, duration: 0.4 }}
-            className="text-sm text-clause-steel"
+            className={`text-sm ${isExperimental ? 'text-clause-steel' : 'text-clause-cloud/70'}`}
           >
             AI Products • AI Consulting • Modern Marketing • Custom Technology
           </motion.p>

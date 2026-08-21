@@ -1,123 +1,73 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useMotionValueEvent, useScroll } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ThemeToggle } from './ThemeToggle';
 
 const navLinks = [
-  { name: 'Home', href: '#hero' },
-  { name: 'Products', href: '#products' },
-  { name: 'Consulting', href: '#consulting' },
-  { name: 'Build Studio', href: '#build-studio' },
-  { name: 'Industries', href: '#industries' },
-  { name: 'Insights', href: '#insights' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Home', href: '/' },
+  { name: 'Products', href: '/products' },
+  { name: 'Consulting', href: '/consulting' },
+  { name: 'Build Studio', href: '/build-studio' },
+  { name: 'Industries', href: '/industries' },
+  { name: 'Insights', href: '/insights' },
+  { name: 'About', href: '/about' },
+  { name: 'Contact', href: '/contact' },
 ];
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [visible, setVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [activeSection, setActiveSection] = useState('hero');
-  const { scrollY } = useScroll();
+  const pathname = usePathname();
 
-  useMotionValueEvent(scrollY, 'change', (latest) => {
-    if (latest < 50) {
-      setVisible(true);
-      setLastScrollY(latest);
-      return;
-    }
-
-    if (latest < lastScrollY) {
-      setVisible(true);
-    } else if (latest > lastScrollY + 10) {
-      setVisible(false);
-      setIsOpen(false);
-    }
-    setLastScrollY(latest);
-  });
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.3, rootMargin: '-80px 0px -40% 0px' }
-    );
-
-    navLinks.forEach((link) => {
-      const el = document.querySelector(link.href);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  const scrollTo = (href: string) => {
-    const el = document.querySelector(href);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-    setIsOpen(false);
-  };
+  const isActive = (href: string) =>
+    href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
 
   return (
-    <AnimatePresence mode="wait">
-      {visible && (
-        <motion.div
-          initial={{ y: -100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -100, opacity: 0 }}
-          transition={{ duration: 0.3, ease: 'easeInOut' }}
-          className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl"
-        >
+    <motion.div
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.3, ease: 'easeInOut' }}
+      className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-5xl"
+    >
           <nav
             className={`
               rounded-2xl border backdrop-blur-xl
               bg-clause-white/90 border-clause-steel/20
-              dark:bg-clause-white/95 dark:border-clause-intelligence/20
               px-6 py-3
               transition-all duration-300
             `}
           >
             <div className="flex items-center justify-between">
-              <a
-                href="#hero"
-                onClick={(e) => { e.preventDefault(); scrollTo('#hero'); }}
-                className="text-xl font-bold"
-              >
+              <Link href="/" className="text-xl font-bold">
                 <span className="text-clause-midnight">
                   Clause
                 </span>
-              </a>
+              </Link>
 
               <div className="hidden md:flex items-center gap-1">
                 {navLinks.map((link) => (
-                  <a
+                  <Link
                     key={link.name}
                     href={link.href}
-                    onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}
                     className={`
                       relative px-3 py-1.5 text-sm font-medium rounded-lg transition-colors
-                      ${activeSection === link.href.slice(1)
+                      ${isActive(link.href)
                         ? 'text-clause-intelligence'
                         : 'text-clause-steel hover:text-clause-midnight'
                       }
                     `}
                   >
                     {link.name}
-                    {activeSection === link.href.slice(1) && (
+                    {isActive(link.href) && (
                       <motion.div
                         layoutId="activeNav"
                         className="absolute inset-0 rounded-lg bg-clause-intelligence/10"
                         transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                       />
                     )}
-                  </a>
+                  </Link>
                 ))}
               </div>
 
@@ -152,30 +102,31 @@ export function Navbar() {
               >
                 <div className="p-4 flex flex-col gap-1">
                   {navLinks.map((link, i) => (
-                    <motion.a
+                    <motion.div
                       key={link.name}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.05 }}
-                      href={link.href}
-                      onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}
-                      className={`
-                        px-4 py-2.5 rounded-lg text-sm font-medium transition-colors
-                        ${activeSection === link.href.slice(1)
-                          ? 'bg-clause-intelligence/10 text-clause-intelligence'
-                          : 'text-clause-steel hover:bg-clause-steel/10 hover:text-clause-midnight'
-                        }
-                      `}
                     >
-                      {link.name}
-                    </motion.a>
+                      <Link
+                        href={link.href}
+                        onClick={() => setIsOpen(false)}
+                        className={`
+                          block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors
+                          ${isActive(link.href)
+                            ? 'bg-clause-intelligence/10 text-clause-intelligence'
+                            : 'text-clause-steel hover:bg-clause-steel/10 hover:text-clause-midnight'
+                          }
+                        `}
+                      >
+                        {link.name}
+                      </Link>
+                    </motion.div>
                   ))}
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
         </motion.div>
-      )}
-    </AnimatePresence>
   );
 }

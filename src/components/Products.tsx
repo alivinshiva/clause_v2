@@ -1,75 +1,70 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { AnimateOnScroll } from './AnimateOnScroll';
+import { Carousel, Card, type CarouselCard } from '@/components/ui/apple-cards-carousel';
+import { products } from '@/lib/data';
+
+const gradients: Record<string, string> = {
+  indigo: 'linear-gradient(135deg, #8E97DB 0%, #B39DDB 100%)',
+  cyan: 'linear-gradient(135deg, #86C5D8 0%, #93A8DC 100%)',
+  amber: 'linear-gradient(135deg, #E3C08F 0%, #DFA093 100%)',
+};
 
 export function Products() {
-  const [isExperimental, setIsExperimental] = useState(false);
+  const cards: CarouselCard[] = products.map((product) => ({
+    category: product.category,
+    title: product.name,
+    gradient: gradients[product.accent] ?? gradients.indigo,
+    tagline: product.tagline,
+    highlights: product.capabilities.slice(0, 3).map((cap) => cap.title),
+    href: `/products/${product.slug}`,
+    ctaLabel: `Explore ${product.name}`,
+    content: (
+      <div>
+        <p className="text-lg font-medium text-clause-midnight leading-relaxed">
+          {product.tagline}
+        </p>
+        <p className="mt-4 text-clause-steel leading-relaxed">
+          {product.description}
+        </p>
+        <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+          {product.capabilities.map((cap) => (
+            <li
+              key={cap.title}
+              className="flex items-start gap-2.5 rounded-xl border border-clause-steel/10 bg-[#F7F9FC] p-4"
+            >
+              <svg
+                className="w-4 h-4 mt-0.5 text-clause-intelligence shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              <div>
+                <p className="text-sm font-medium text-clause-midnight">
+                  {cap.title}
+                </p>
+                <p className="text-xs text-clause-steel mt-1 leading-relaxed">
+                  {cap.description}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ),
+  }));
 
-  useEffect(() => {
-    const checkTheme = () => {
-      setIsExperimental(document.documentElement.getAttribute('data-theme') === 'experimental');
-    };
-    checkTheme();
-    const observer = new MutationObserver(checkTheme);
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    return () => observer.disconnect();
-  }, []);
-
-  const products = [
-    {
-      name: 'TestArq',
-      tagline: 'AI-Native Quality Intelligence',
-      description:
-        'TestArq helps organisations transform software quality from a reporting activity into an intelligent decision system.',
-      capabilities: [
-        'AI-assisted test design',
-        'Requirements traceability',
-        'Test coverage intelligence',
-        'Risk and readiness visibility',
-        'Jira / Azure DevOps / QTest integrations',
-        'Enterprise governance',
-      ],
-      cta: 'Explore TestArq',
-    },
-    {
-      name: 'ShowGrid',
-      tagline: 'The Engagement Layer for Modern Fandom',
-      description:
-        'ShowGrid transforms fan creativity, opinions and participation into structured engagement and measurable audience signals.',
-      capabilities: [
-        'Grid Sports',
-        'Grid Play',
-        'Fanverse',
-        'Community challenges',
-        'Open ratings',
-        'Fan engagement analytics',
-      ],
-      cta: 'Explore ShowGrid',
-    },
-    {
-      name: 'Grid Pulse',
-      tagline: 'Political Intelligence Through Public Signals',
-      description:
-        'Grid Pulse helps organise and interpret political conversations, public opinion and engagement signals.',
-      capabilities: [
-        'Political sentiment monitoring',
-        'Public issue tracking',
-        'Narrative intelligence',
-        'Constituency and audience insights',
-        'Engagement analytics',
-        'Decision dashboards',
-      ],
-      cta: 'Explore Grid Pulse',
-    },
-  ];
+  const items = cards.map((card, index) => <Card key={card.title} card={card} index={index} />);
 
   return (
-    <section id="products" className="w-full py-24 px-6 bg-clause-cloud relative z-10">
-      <div className="max-w-6xl mx-auto">
+    <section id="products" className="w-full py-16 px-6 bg-[#EAF8FB] relative z-10">
+      <div className="max-w-7xl mx-auto">
         <AnimateOnScroll>
-          <div className="text-center mb-16">
+          <div className="text-center mb-10">
             <h2 className="text-3xl font-semibold tracking-tight text-clause-midnight">
               Products Built Around Real-World Problems
             </h2>
@@ -80,70 +75,18 @@ export function Products() {
           </div>
         </AnimateOnScroll>
 
-        <div className="grid gap-8 md:grid-cols-3">
-          {products.map((product, index) => (
-            <AnimateOnScroll
-              key={product.name}
-              direction={index % 2 === 0 ? 'left' : 'right'}
-              delay={index * 0.1}
+        <Carousel items={items} />
+
+        <AnimateOnScroll direction="up">
+          <div className="text-center mt-10">
+            <Link
+              href="/products"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-clause-intelligence transition-all hover:gap-2.5"
             >
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                className={`rounded-2xl p-8 border transition-all duration-300 hover:shadow-lg bg-white ${
-                  isExperimental ? 'glow-card border-clause-intelligence/20' : 'border-clause-steel/10'
-                }`}
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-clause-intelligence flex items-center justify-center">
-                    <span className="text-white font-semibold text-sm">
-                      {product.name.charAt(0)}
-                    </span>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-clause-midnight">
-                      {product.name}
-                    </h3>
-                    <p className="text-sm text-clause-intelligence font-medium">
-                      {product.tagline}
-                    </p>
-                  </div>
-                </div>
-
-                <p className="text-clause-steel text-sm leading-relaxed mb-6">
-                  {product.description}
-                </p>
-
-                <ul className="space-y-2 mb-8">
-                  {product.capabilities.map((cap) => (
-                    <li
-                      key={cap}
-                      className="flex items-start gap-2 text-sm text-clause-steel"
-                    >
-                      <svg
-                        className="w-4 h-4 mt-0.5 text-clause-intelligence shrink-0"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
-                      {cap}
-                    </li>
-                  ))}
-                </ul>
-
-                <button className="w-full py-3 px-6 rounded-lg bg-clause-intelligence text-white font-medium text-sm hover:bg-clause-intelligence/90 transition-all">
-                  {product.cta}
-                </button>
-              </motion.div>
-            </AnimateOnScroll>
-          ))}
-        </div>
+              View all products <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+        </AnimateOnScroll>
       </div>
     </section>
   );
