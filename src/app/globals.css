@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-clause-midnight: var(--clause-midnight);
+  --color-clause-intelligence: var(--clause-intelligence);
+  --color-clause-signal: var(--clause-signal);
+  --color-clause-cloud: var(--clause-cloud);
+  --color-clause-white: var(--clause-white);
+  --color-clause-slate: var(--clause-slate);
+  --color-clause-graphite: var(--clause-graphite);
+  --color-clause-steel: var(--clause-steel);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* Theme 1: Official Brand Colors (Light) */
+:root {
+  --clause-midnight: #0B1224;
+  --clause-intelligence: #5757E8;
+  --clause-signal: #22B8D6;
+  --clause-cloud: #F5F7FC;
+  --clause-white: #FFFFFF;
+  --clause-slate: #18233D;
+  --clause-graphite: #232A3B;
+  --clause-steel: #667085;
+  
+  --background: #FFFFFF;
+  --foreground: #0B1224;
+}
+
+/* Theme 2: Experimental - Light UI with Glow Effects */
+[data-theme="experimental"] {
+  --clause-midnight: #1a1a2e;
+  --clause-intelligence: #6c5ce7;
+  --clause-signal: #00cec9;
+  --clause-cloud: #f0f0f5;
+  --clause-white: #ffffff;
+  --clause-slate: #2d2d44;
+  --clause-graphite: #3d3d5c;
+  --clause-steel: #6c6c8a;
+  
+  --background: #fafafa;
+  --foreground: #1a1a2e;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Experimental theme styles */
+[data-theme="experimental"] body {
+  background: linear-gradient(180deg, #fafafa 0%, #f5f5fa 50%, #fafafa 100%);
+}
+
+[data-theme="experimental"] .glow-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(108, 92, 231, 0.2);
+  box-shadow: 0 0 20px rgba(108, 92, 231, 0.1), 0 0 40px rgba(0, 206, 201, 0.05);
+}
+
+[data-theme="experimental"] .glow-card:hover {
+  border-color: rgba(108, 92, 231, 0.4);
+  box-shadow: 0 0 30px rgba(108, 92, 231, 0.15), 0 0 60px rgba(0, 206, 201, 0.08);
+}
+
+[data-theme="experimental"] .text-gradient {
+  background: linear-gradient(135deg, #6c5ce7, #00cec9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-theme="experimental"] .bg-section-alt {
+  background: linear-gradient(180deg, #f5f5fa 0%, #fafafa 100%);
+}
