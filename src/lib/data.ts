@@ -4,10 +4,17 @@ export type Product = {
   slug: string;
   name: string;
   category: string;
+  status: string;
+  audience: string;
   tagline: string;
   description: string;
+  problem: string;
+  outcome: string;
+  workflow: string[];
   capabilities: Capability[];
   accent: 'indigo' | 'cyan' | 'amber';
+  image: string;
+  imageAlt: string;
 };
 
 export const products: Product[] = [
@@ -15,10 +22,17 @@ export const products: Product[] = [
     slug: 'testarq',
     name: 'TestArq',
     category: 'AI-Native Quality Intelligence',
+    status: 'Concept product · In development',
+    audience: 'For product, engineering and quality leaders',
     tagline:
       'TestArq helps organisations transform software quality from a reporting activity into an intelligent decision system.',
     description:
       'It converts requirements into structured and traceable test assets while providing visibility into coverage, risk, execution and release readiness.',
+    problem:
+      'Quality teams often work across disconnected requirements, test suites and release reports. The result is duplicated effort, uncertain coverage and late risk discovery.',
+    outcome:
+      'A shared quality intelligence layer that makes requirements traceable, coverage visible and release decisions easier to defend.',
+    workflow: ['Connect requirements', 'Generate test assets', 'Review coverage and risk', 'Track release readiness'],
     capabilities: [
       {
         title: 'AI-assisted test design',
@@ -52,15 +66,24 @@ export const products: Product[] = [
       },
     ],
     accent: 'indigo',
+    image: '/images/products/testarq-system.png',
+    imageAlt: 'Abstract requirements and risk signals flowing into a structured quality system',
   },
   {
     slug: 'showgrid',
     name: 'ShowGrid',
     category: 'The Engagement Layer for Modern Fandom',
+    status: 'Concept product · In development',
+    audience: 'For media, entertainment and sports communities',
     tagline:
       'ShowGrid transforms fan creativity, opinions and participation into structured engagement and measurable audience signals.',
     description:
       'Through community challenges, open ratings, grid-based scoring and fan-created experiences, ShowGrid gives fans new ways to participate in the entertainment and sports communities they care about.',
+    problem:
+      'Audience energy is spread across posts, polls and disconnected platforms. Brands can see attention, but struggle to turn it into sustained participation or useful community insight.',
+    outcome:
+      'A structured participation layer where audiences create, rate and play — while operators learn what their communities value.',
+    workflow: ['Launch an experience', 'Invite participation', 'Structure community signals', 'Learn and activate'],
     capabilities: [
       {
         title: 'Grid Sports',
@@ -94,15 +117,24 @@ export const products: Product[] = [
       },
     ],
     accent: 'cyan',
+    image: '/images/products/showgrid-signal.png',
+    imageAlt: 'Abstract audience signals flowing into a luminous modular grid',
   },
   {
     slug: 'grid-pulse',
     name: 'Grid Pulse',
     category: 'Political Intelligence Through Public Signals',
+    status: 'Concept product · In development',
+    audience: 'For public affairs, research and communications teams',
     tagline:
       'Grid Pulse helps organise and interpret political conversations, public opinion and engagement signals.',
     description:
       'It is designed to help stakeholders understand emerging narratives, audience sentiment and issue-level movement through structured analytics and intelligence.',
+    problem:
+      'Public conversations move faster than periodic research. Teams need a clearer way to separate durable issue movement from short-lived noise and fragmented commentary.',
+    outcome:
+      'A decision-ready view of emerging narratives, sentiment and issue momentum — grounded in transparent public signals.',
+    workflow: ['Define issues and audiences', 'Observe public signals', 'Interpret narrative movement', 'Brief decision-makers'],
     capabilities: [
       {
         title: 'Political sentiment monitoring',
@@ -136,6 +168,8 @@ export const products: Product[] = [
       },
     ],
     accent: 'amber',
+    image: '/images/products/grid-pulse-field.png',
+    imageAlt: 'Abstract public signals resolving into a calm analytical pulse field',
   },
 ];
 

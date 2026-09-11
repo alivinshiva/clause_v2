@@ -111,7 +111,7 @@ export function ServiceCTA({
   );
 }
 
-export function SystemVisual({ variant }: { variant: 'connected' | 'ai' | 'growth' }) {
+export function SystemVisual({ variant }: { variant: 'connected' | 'ai' | 'growth' | 'build' }) {
   if (variant === 'connected') {
     return (
       <div className="service-visual min-h-[460px] p-5 sm:p-8">
@@ -143,13 +143,27 @@ export function SystemVisual({ variant }: { variant: 'connected' | 'ai' | 'growt
 
   const nodes = variant === 'ai'
     ? [['Opportunity', 'Value'], ['Workflow', 'Adoption'], ['Controls', 'Trust'], ['System', 'Scale']]
-    : [['Signal', 'Context'], ['Position', 'Relevance'], ['Demand', 'Momentum'], ['Measure', 'Learning']];
+    : variant === 'build'
+      ? [['Problem', 'Clarity'], ['Prototype', 'Evidence'], ['Product', 'Quality'], ['Operate', 'Learning']]
+      : [['Signal', 'Context'], ['Position', 'Relevance'], ['Demand', 'Momentum'], ['Measure', 'Learning']];
+
+  const visualTitle = variant === 'ai'
+    ? 'Responsible AI system'
+    : variant === 'build'
+      ? 'Product delivery system'
+      : 'Intelligent growth system';
+
+  const visualFooter = variant === 'ai'
+    ? 'Business value with human accountability.'
+    : variant === 'build'
+      ? 'Each stage removes risk before the next investment.'
+      : 'Every signal improves the next decision.';
 
   return (
     <div className="service-visual min-h-[460px] p-5 sm:p-8">
       <div className="relative flex h-full min-h-[400px] flex-col">
         <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.16em] text-white/35">
-          <span>{variant === 'ai' ? 'Responsible AI system' : 'Intelligent growth system'}</span>
+          <span>{visualTitle}</span>
           <span>Live model</span>
         </div>
         <div className="relative my-auto grid grid-cols-2 gap-3">
@@ -167,7 +181,7 @@ export function SystemVisual({ variant }: { variant: 'connected' | 'ai' | 'growt
           </div>
         </div>
         <p className="border-t border-white/10 pt-5 text-xs text-white/42">
-          {variant === 'ai' ? 'Business value with human accountability.' : 'Every signal improves the next decision.'}
+          {visualFooter}
         </p>
       </div>
     </div>
