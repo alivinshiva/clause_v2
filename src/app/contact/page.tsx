@@ -3,7 +3,7 @@ import { PageHeader } from '@/components/ui';
 import { ContactForm } from '@/components/ContactForm';
 
 export const metadata: Metadata = {
-  title: 'Contact | Clause Holdings',
+  title: 'Contact',
   description:
     'Tell us what you are trying to build, improve, automate or grow — every engagement starts with the business problem.',
 };

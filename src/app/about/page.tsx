@@ -3,7 +3,7 @@ import { PageHeader, ButtonLink } from '@/components/ui';
 import { principles, workSteps } from '@/lib/data';
 
 export const metadata: Metadata = {
-  title: 'About | Clause Holdings',
+  title: 'About',
   description:
     'Clause Holdings is a product and consulting company focused on building intelligent systems, digital platforms and modern growth capabilities.',
 };

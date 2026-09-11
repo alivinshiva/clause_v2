@@ -1,214 +1,135 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { PageHeader, ButtonLink, TextLink } from '@/components/ui';
-import {
-  aiConsulting,
-  marketingConsulting,
-  integratedSolutions,
-  integratedSuitableFor,
-  engagementTypes,
-  starterPackages,
-} from '@/lib/data';
+import { ServiceCTA, ServiceHero, SystemVisual } from '@/components/ServiceShell';
+import { engagementTypes, starterPackages } from '@/lib/data';
 
 export const metadata: Metadata = {
-  title: 'Consulting | Clause Holdings',
-  description:
-    'AI and marketing consulting that connects intelligent capability to measurable business outcomes.',
+  title: 'AI Transformation and Product Consulting',
+  description: 'One connected practice for AI transformation, intelligent growth systems and product-grade implementation.',
 };
+
+const practices = [
+  {
+    number: '01',
+    label: 'AI transformation',
+    title: 'Make AI useful, governable and owned by your team.',
+    description: 'Prioritise the right opportunities, redesign real workflows and move from experimentation to responsible implementation.',
+    href: '/consulting/ai',
+    cta: 'Explore AI transformation',
+  },
+  {
+    number: '02',
+    label: 'AI-enabled growth',
+    title: 'Build a growth system that learns from every signal.',
+    description: 'Connect market position, demand, AI-search visibility, automation and analytics around measurable commercial outcomes.',
+    href: '/consulting/marketing',
+    cta: 'Explore AI-enabled growth',
+  },
+  {
+    number: '03',
+    label: 'Product engineering',
+    title: 'Turn specialised requirements into a system ready for use.',
+    description: 'Combine product strategy, experience design, AI and engineering to validate, build and operationalise a digital product.',
+    href: '/build-studio',
+    cta: 'Explore product engineering',
+  },
+];
 
 export default function ConsultingPage() {
   return (
     <>
-      <PageHeader
-        eyebrow="Clause Consulting"
-        title="Consulting That Connects AI and Growth"
-        description="Two focused practices, one goal: turn intelligent capability into measurable business outcomes."
+      <ServiceHero
+        eyebrow="Clause capabilities"
+        title="Strategy that ends in a working system."
+        description="Clause brings direction, design and delivery into one accountable path—from a difficult business problem to a system your team can use, govern and improve."
+        primaryLabel="Book a discovery call"
+        secondaryLabel="Explore the practice"
+        secondaryHref="#practices"
+        visual={<SystemVisual variant="connected" />}
       />
 
-      <section className="bg-clause-cloud py-20 px-6">
-        <div className="max-w-6xl mx-auto grid gap-8 lg:grid-cols-2">
-          <div className="flex flex-col rounded-2xl p-8 bg-white border border-clause-steel/10">
-            <h2 className="text-xl font-semibold text-clause-midnight">AI Consulting</h2>
-            <p className="mt-4 text-sm leading-relaxed text-clause-steel">
-              Move from AI experimentation to practical implementation. Identify
-              valuable AI opportunities, redesign workflows and implement responsible
-              AI solutions that create measurable value.
-            </p>
-            <ul className="mt-5 flex-1 space-y-2">
-              {aiConsulting.map((area) => (
-                <li key={area.title} className="flex items-start gap-2 text-sm text-clause-steel">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-clause-intelligence" aria-hidden="true" />
-                  {area.title}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-7">
-              <TextLink href="/consulting/ai">Explore AI Consulting</TextLink>
+      <section id="practices" className="bg-white px-6 py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
+            <div>
+              <p className="section-label">Three capabilities. One outcome.</p>
+              <h2 className="section-title mt-5">No gap between the recommendation and the result.</h2>
             </div>
-          </div>
-
-          <div className="flex flex-col rounded-2xl p-8 bg-white border border-clause-steel/10">
-            <h2 className="text-xl font-semibold text-clause-midnight">Marketing Consulting</h2>
-            <p className="mt-4 text-sm leading-relaxed text-clause-steel">
-              Build a modern marketing system for the AI era. Strengthen positioning,
-              improve visibility, generate demand and connect marketing activity to
-              measurable business growth.
-            </p>
-            <ul className="mt-5 flex-1 space-y-2">
-              {marketingConsulting.map((area) => (
-                <li key={area.title} className="flex items-start gap-2 text-sm text-clause-steel">
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-clause-signal" aria-hidden="true" />
-                  {area.title}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-7">
-              <TextLink href="/consulting/marketing">Explore Marketing Consulting</TextLink>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="integrated" className="bg-white py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-semibold text-clause-midnight mb-4">
-              AI and Marketing Should Work Together
-            </h2>
-            <p className="text-clause-steel max-w-2xl mx-auto mb-6">
-              Many organisations treat AI implementation, digital transformation and
-              marketing growth as separate initiatives. Clause brings them together.
-            </p>
-            <p className="text-clause-steel max-w-2xl mx-auto">
-              We help companies use AI to improve customer research, content development,
-              personalisation, campaign execution, lead management, analytics and
-              decision-making.
+            <p className="max-w-2xl text-xl leading-8 text-clause-steel lg:pt-9 lg:text-2xl lg:leading-9">
+              Work with a focused team that can frame the opportunity, design the operating model and build the technology behind it.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-clause-cloud rounded-2xl p-8 border border-clause-steel/10">
-              <h3 className="text-xl font-semibold text-clause-midnight mb-6 flex items-center gap-3">
-                <span className="w-10 h-10 rounded-lg bg-clause-intelligence/10 flex items-center justify-center text-clause-intelligence">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
-                  </svg>
-                </span>
-                Integrated Solutions
-              </h3>
-              <ul className="space-y-3">
-                {integratedSolutions.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-clause-steel">
-                    <span className="w-1.5 h-1.5 rounded-full bg-clause-intelligence mt-2 flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="bg-clause-cloud rounded-2xl p-8 border border-clause-steel/10">
-              <h3 className="text-xl font-semibold text-clause-midnight mb-6 flex items-center gap-3">
-                <span className="w-10 h-10 rounded-lg bg-clause-signal/10 flex items-center justify-center text-clause-signal">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
-                  </svg>
-                </span>
-                Suitable For
-              </h3>
-              <ul className="space-y-3">
-                {integratedSuitableFor.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-clause-steel">
-                    <span className="w-1.5 h-1.5 rounded-full bg-clause-signal mt-2 flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="engagements" className="bg-clause-cloud py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-clause-midnight mb-4">
-              Flexible Engagements Built Around the Business Need
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-            {engagementTypes.map((engagement) => (
-              <div
-                key={engagement.title}
-                className="p-6 rounded-xl bg-white border border-clause-steel/10 hover:border-clause-intelligence/40 transition-colors"
-              >
-                <div className="w-10 h-10 rounded-lg bg-clause-intelligence/10 flex items-center justify-center mb-4">
-                  <div className="w-3 h-3 rounded-full bg-clause-intelligence" />
+          <div className="mt-20 border-t border-clause-midnight/12">
+            {practices.map((practice) => (
+              <article key={practice.number} className="grid gap-7 border-b border-clause-midnight/12 py-10 lg:grid-cols-[0.45fr_1.1fr_1.1fr_auto] lg:items-start lg:gap-10">
+                <div>
+                  <span className="text-xs font-medium text-clause-intelligence">{practice.number}</span>
+                  <p className="mt-3 text-[10px] font-semibold uppercase tracking-[0.16em] text-clause-steel">{practice.label}</p>
                 </div>
-                <h3 className="text-lg font-semibold text-clause-midnight mb-2">
-                  {engagement.title}
-                </h3>
-                <p className="text-sm text-clause-steel">{engagement.description}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-clause-midnight">
-              Starting Engagements
-            </h2>
-            <p className="mt-4 text-clause-steel max-w-2xl mx-auto">
-              Defined starting points with clear outputs — designed to create value quickly.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {starterPackages.map((starter) => (
-              <div
-                key={starter.title}
-                className="p-6 rounded-xl bg-white border border-clause-steel/10 hover:border-clause-intelligence/40 transition-colors"
-              >
-                <h3 className="text-xl font-semibold text-clause-midnight mb-2">
-                  {starter.title}
-                </h3>
-                <p className="text-clause-steel mb-4">{starter.description}</p>
-                <h4 className="text-sm font-medium text-clause-midnight mb-2">Outputs:</h4>
-                <ul className="space-y-1">
-                  {starter.outputs.map((output) => (
-                    <li key={output} className="text-sm text-clause-steel flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-clause-intelligence" />
-                      {output}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                <h3 className="max-w-md text-2xl font-semibold leading-tight tracking-[-0.04em] text-clause-midnight sm:text-3xl">{practice.title}</h3>
+                <p className="max-w-lg text-sm leading-6 text-clause-steel">{practice.description}</p>
+                <Link href={practice.href} aria-label={practice.cta} className="flex h-11 w-11 items-center justify-center rounded-full border border-clause-midnight/15 text-clause-midnight transition hover:border-clause-intelligence hover:bg-clause-intelligence hover:text-white">↗</Link>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl font-semibold tracking-tight text-clause-midnight sm:text-3xl">
-            Start with a focused sprint
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-clause-steel">
-            Tell us what you are trying to improve and we will recommend the
-            fastest path from problem to measurable value.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <ButtonLink href="/contact" withArrow>
-              Start a conversation
-            </ButtonLink>
-            <Link
-              href="/consulting/ai"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-clause-intelligence transition-all hover:gap-2.5"
-            >
-              Explore AI Consulting <span aria-hidden="true">→</span>
-            </Link>
+      <section className="bg-clause-cloud px-6 py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-10 lg:grid-cols-[0.65fr_1.35fr] lg:gap-20">
+            <div>
+              <p className="section-label">Defined starting points</p>
+              <h2 className="section-title mt-5">Create clarity before committing to a transformation.</h2>
+              <p className="mt-6 max-w-md leading-7 text-clause-steel">Each starting engagement produces tangible outputs and a clear recommendation for what should happen next.</p>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {starterPackages.map((starter, index) => (
+                <article key={starter.title} className={`flex min-h-[310px] flex-col rounded-2xl border p-6 sm:p-7 ${index === 0 ? 'border-clause-intelligence/30 bg-clause-midnight text-white' : 'border-clause-midnight/10 bg-white text-clause-midnight'}`}>
+                  <div className="flex items-center justify-between">
+                    <span className={`text-xs ${index === 0 ? 'text-clause-signal' : 'text-clause-intelligence'}`}>0{index + 1}</span>
+                    {index === 0 && <span className="rounded-full border border-white/15 px-3 py-1 text-[9px] uppercase tracking-[0.15em] text-white/55">Recommended start</span>}
+                  </div>
+                  <h3 className="mt-12 text-2xl font-semibold tracking-[-0.035em]">{starter.title}</h3>
+                  <p className={`mt-3 text-sm leading-6 ${index === 0 ? 'text-white/52' : 'text-clause-steel'}`}>{starter.description}</p>
+                  <ul className={`mt-auto grid gap-2 pt-8 text-xs ${index === 0 ? 'text-white/55' : 'text-clause-steel'}`}>
+                    {starter.outputs.map((output) => <li key={output} className="flex items-center gap-2"><span className={`h-1 w-1 rounded-full ${index === 0 ? 'bg-clause-signal' : 'bg-clause-intelligence'}`} />{output}</li>)}
+                  </ul>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
+
+      <section className="bg-white px-6 py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex flex-col gap-6 border-b border-clause-midnight/12 pb-12 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <p className="section-label">Ways to work together</p>
+              <h2 className="section-title mt-5 max-w-3xl">Match the engagement to the decision.</h2>
+            </div>
+            <p className="max-w-md text-sm leading-6 text-clause-steel">Begin with advice, validate through a pilot or engage Clause through implementation and continuous improvement.</p>
+          </div>
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-clause-midnight/10 bg-clause-midnight/10 mt-10 sm:grid-cols-2 lg:grid-cols-3">
+            {engagementTypes.map((engagement, index) => (
+              <article key={engagement.title} className="min-h-52 bg-white p-6 lg:p-7">
+                <span className="text-xs font-medium text-clause-intelligence">0{index + 1}</span>
+                <h3 className="mt-8 text-lg font-semibold tracking-[-0.025em] text-clause-midnight">{engagement.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-clause-steel">{engagement.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <ServiceCTA
+        eyebrow="A focused first step"
+        title="Clarify the opportunity before choosing the solution."
+        description="Tell us what needs to change. We will help frame the problem and recommend the most useful next step—even if that step is not a large engagement."
+        label="Book a discovery call"
+      />
     </>
   );
 }

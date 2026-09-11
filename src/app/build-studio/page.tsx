@@ -3,7 +3,7 @@ import { PageHeader, ButtonLink } from '@/components/ui';
 import { buildCapabilities, buildProcessSteps } from '@/lib/data';
 
 export const metadata: Metadata = {
-  title: 'Build Studio | Clause Holdings',
+  title: 'Build Studio',
   description:
     'Custom AI applications, SaaS platforms, analytics systems and intelligent workflows — designed and built product-grade.',
 };

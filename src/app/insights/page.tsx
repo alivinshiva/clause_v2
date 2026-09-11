@@ -3,7 +3,7 @@ import { PageHeader, ButtonLink } from '@/components/ui';
 import { insights } from '@/lib/data';
 
 export const metadata: Metadata = {
-  title: 'Insights | Clause Holdings',
+  title: 'Insights',
   description:
     'Practical perspectives across AI strategy, agentic AI, governance, automation, marketing transformation, AEO/GEO and product innovation.',
 };

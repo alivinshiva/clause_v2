@@ -3,7 +3,7 @@ import { PageHeader, ButtonLink } from '@/components/ui';
 import { industries } from '@/lib/data';
 
 export const metadata: Metadata = {
-  title: 'Industries | Clause Holdings',
+  title: 'Industries',
   description:
     'Expertise that adapts to the business context — specific problems Clause solves within each sector.',
 };

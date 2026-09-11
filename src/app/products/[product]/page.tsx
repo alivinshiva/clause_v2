@@ -13,8 +13,8 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { product } = await params;
   const item = products.find((p) => p.slug === product);
-  if (!item) return { title: 'Product | Clause Holdings' };
-  return { title: `${item.name} | Clause Holdings`, description: item.tagline };
+  if (!item) return { title: 'Product' };
+  return { title: item.name, description: item.tagline };
 }
 
 const accentColor: Record<string, string> = {

@@ -1,85 +1,131 @@
 import type { Metadata } from 'next';
-import { PageHeader, ButtonLink, TextLink } from '@/components/ui';
-import { marketingConsulting } from '@/lib/data';
+import Link from 'next/link';
+import { ServiceAreaRows, ServiceCTA, ServiceHero, SystemVisual } from '@/components/ServiceShell';
+import { marketingConsulting, starterPackages } from '@/lib/data';
 
 export const metadata: Metadata = {
-  title: 'Marketing Consulting | Clause Holdings',
-  description:
-    'Build a modern marketing system for the AI era — strategy, positioning, demand generation, AEO/GEO, analytics and marketing technology.',
+  title: 'AI-Enabled Growth Consulting',
+  description: 'Connect positioning, demand generation, AI-search visibility, automation and analytics into one measurable growth system.',
 };
 
+const growthLoop = [
+  ['Understand', 'Customer, category and commercial signals'],
+  ['Position', 'A clear reason to choose and remember'],
+  ['Create demand', 'Connected journeys, campaigns and content'],
+  ['Learn', 'Pipeline, revenue and decision intelligence'],
+];
+
+const outcomes = [
+  ['Sharper market position', 'Align the category, customer and product story around a clear commercial advantage.'],
+  ['More useful demand', 'Design programmes around buying intent and pipeline quality rather than surface-level activity.'],
+  ['Visibility in a changing search world', 'Build authority for search engines and AI answer platforms with genuinely useful expertise.'],
+  ['A measurable operating system', 'Connect teams, technology and analytics so each cycle improves the next decision.'],
+];
+
 export default function MarketingConsultingPage() {
+  const growthStarters = starterPackages.filter((item) => item.title === 'Marketing Growth Diagnostic' || item.title === 'AI Search Visibility Audit');
+
   return (
     <>
-      <PageHeader
-        eyebrow="Clause Consulting — Marketing"
-        title="Build a modern marketing system for the AI era"
-        description="Clause helps companies strengthen their positioning, improve market visibility, generate demand and connect marketing activity to measurable business growth."
+      <ServiceHero
+        eyebrow="AI-enabled growth"
+        title="Build a growth system that gets smarter."
+        description="Clause connects positioning, demand, AI-search visibility, automation and analytics around the decisions that create measurable commercial momentum."
+        primaryLabel="Diagnose your growth system"
+        secondaryLabel="Explore capabilities"
+        secondaryHref="#capabilities"
+        visual={<SystemVisual variant="growth" />}
       />
 
-      <section className="bg-clause-cloud py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-semibold tracking-tight text-clause-midnight">
-              Seven service areas, one growth system
-            </h2>
-            <p className="mt-4 text-lg text-clause-steel max-w-2xl mx-auto">
-              From positioning to pipeline, each area connects marketing activity
-              to measurable business outcomes.
-            </p>
+      <section className="bg-white px-6 py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-12 lg:grid-cols-[0.75fr_1.25fr] lg:gap-24">
+            <div>
+              <p className="section-label">The growth loop</p>
+              <h2 className="section-title mt-5">Connect every signal to the next decision.</h2>
+              <p className="mt-6 max-w-md leading-7 text-clause-steel">Growth compounds when customer learning, market position, execution and measurement operate as one system.</p>
+            </div>
+            <ol className="relative grid gap-3 sm:grid-cols-2">
+              <div className="absolute left-1/2 top-1/2 hidden h-px w-3/4 -translate-x-1/2 bg-clause-intelligence/20 sm:block" />
+              {growthLoop.map(([title, description], index) => (
+                <li key={title} className="relative z-10 min-h-48 rounded-2xl border border-clause-midnight/10 bg-clause-cloud p-6">
+                  <span className="text-xs font-medium text-clause-intelligence">0{index + 1}</span>
+                  <h3 className="mt-10 text-xl font-semibold tracking-[-0.03em] text-clause-midnight">{title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-clause-steel">{description}</p>
+                </li>
+              ))}
+            </ol>
           </div>
+        </div>
+      </section>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {marketingConsulting.map((area) => (
-              <div
-                key={area.title}
-                className="rounded-2xl border border-clause-steel/10 bg-white p-7 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
-              >
-                <span className="block h-2.5 w-2.5 rounded-full bg-clause-signal" aria-hidden="true" />
-                <h3 className="mt-4 text-base font-semibold tracking-tight text-clause-midnight">
-                  {area.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-clause-steel">{area.blurb}</p>
-                <ul className="mt-4 space-y-1.5">
-                  {area.services.map((service) => (
-                    <li key={service} className="flex items-start gap-2 text-sm text-clause-steel">
-                      <svg
-                        className="w-4 h-4 mt-0.5 text-clause-signal shrink-0"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                      </svg>
-                      {service}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+      <section className="bg-[#07101f] px-6 py-24 text-white lg:py-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex flex-col gap-7 border-b border-white/12 pb-12 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <p className="section-label text-clause-signal">Commercial outcomes</p>
+              <h2 className="mt-5 max-w-3xl text-4xl font-semibold leading-[1.02] tracking-[-0.05em] sm:text-5xl lg:text-6xl">Less disconnected activity. More cumulative intelligence.</h2>
+            </div>
+            <p className="max-w-md text-sm leading-6 text-white/48">The goal is not to add more channels. It is to make the commercial system clearer, more responsive and more accountable.</p>
+          </div>
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 mt-10 sm:grid-cols-2">
+            {outcomes.map(([title, description], index) => (
+              <article key={title} className="min-h-60 bg-[#0a1425] p-7 lg:p-9">
+                <span className="text-xs text-clause-signal">0{index + 1}</span>
+                <h3 className="mt-12 text-2xl font-semibold tracking-[-0.035em]">{title}</h3>
+                <p className="mt-4 max-w-md text-sm leading-6 text-white/48">{description}</p>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl font-semibold tracking-tight text-clause-midnight sm:text-3xl">
-            Start with a growth diagnostic
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-clause-steel">
-            The Marketing Growth Diagnostic evaluates your complete marketing
-            system — positioning, journey, channels — and returns a clear growth
-            roadmap.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <ButtonLink href="/contact" variant="brand" withArrow>
-              Start a conversation
-            </ButtonLink>
-            <TextLink href="/consulting#engagements">Explore starting engagements</TextLink>
+      <section id="capabilities" className="bg-clause-cloud px-6 py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-16 grid gap-8 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
+            <div>
+              <p className="section-label">Growth capabilities</p>
+              <h2 className="section-title mt-5">Design the system around the constraint.</h2>
+            </div>
+            <p className="max-w-2xl text-xl leading-8 text-clause-steel lg:pt-9">Open each area to explore the practical work behind it. We combine only the capabilities needed to move the commercial objective.</p>
+          </div>
+          <ServiceAreaRows areas={marketingConsulting} />
+        </div>
+      </section>
+
+      <section className="bg-white px-6 py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-24">
+            <div>
+              <p className="section-label">Defined starting points</p>
+              <h2 className="section-title mt-5">Diagnose before adding more activity.</h2>
+              <p className="mt-6 max-w-md leading-7 text-clause-steel">Create a clear baseline, surface the highest-leverage constraints and leave with a prioritised roadmap.</p>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {growthStarters.map((starter, index) => (
+                <article key={starter.title} className={`flex min-h-[370px] flex-col rounded-2xl border p-7 ${index === 0 ? 'border-clause-intelligence bg-clause-intelligence text-white' : 'border-clause-midnight/10 bg-clause-cloud text-clause-midnight'}`}>
+                  <span className={`text-[10px] font-semibold uppercase tracking-[0.16em] ${index === 0 ? 'text-white/55' : 'text-clause-intelligence'}`}>{index === 0 ? 'Complete system' : 'Search & AI visibility'}</span>
+                  <h3 className="mt-12 text-3xl font-semibold tracking-[-0.04em]">{starter.title}</h3>
+                  <p className={`mt-4 text-sm leading-6 ${index === 0 ? 'text-white/65' : 'text-clause-steel'}`}>{starter.description}</p>
+                  <ul className={`mt-auto space-y-2 pt-9 text-xs ${index === 0 ? 'text-white/65' : 'text-clause-steel'}`}>
+                    {starter.outputs.map((output) => <li key={output} className="flex items-center gap-2"><span className={`h-1 w-1 rounded-full ${index === 0 ? 'bg-clause-signal' : 'bg-clause-intelligence'}`} />{output}</li>)}
+                  </ul>
+                </article>
+              ))}
+            </div>
+          </div>
+          <div className="mt-10 text-right">
+            <Link href="/consulting" className="text-sm font-semibold text-clause-intelligence hover:text-clause-midnight">Compare all engagement options ↗</Link>
           </div>
         </div>
       </section>
+
+      <ServiceCTA
+        eyebrow="Your next growth decision"
+        title="Find the constraint before funding more activity."
+        description="Bring the commercial target, market question or visibility challenge. We will help identify where a more connected growth system can create leverage."
+        label="Diagnose your growth system"
+      />
     </>
   );
 }

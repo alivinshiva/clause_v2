@@ -4,7 +4,7 @@ import { PageHeader, ButtonLink } from '@/components/ui';
 import { products } from '@/lib/data';
 
 export const metadata: Metadata = {
-  title: 'Products | Clause Holdings',
+  title: 'Products',
   description:
     'Clause develops focused digital platforms across quality intelligence, consumer engagement and political insights.',
 };
