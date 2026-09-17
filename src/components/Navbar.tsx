@@ -12,6 +12,7 @@ const capabilities = [
 ];
 
 const primaryLinks = [
+  { name: 'Work', href: '/work' },
   { name: 'Products', href: '/products' },
   { name: 'Industries', href: '/industries' },
   { name: 'Insights', href: '/insights' },

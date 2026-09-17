@@ -12,6 +12,7 @@ const footerGroups = [
   {
     label: 'Explore',
     links: [
+      ['Work', '/work'],
       ['Products', '/products'],
       ['Industries', '/industries'],
       ['Insights', '/insights'],
