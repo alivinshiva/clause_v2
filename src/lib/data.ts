@@ -676,17 +676,3 @@ export const principles: Principle[] = [
       'We leave teams stronger than we found them. Capability building is embedded in every engagement.',
   },
 ];
-
-export type Insight = { title: string; date: string; category: string };
-
-export const insights: Insight[] = [
-  { title: 'From AI Experiments to Business Value', date: 'Aug 2026', category: 'AI Strategy' },
-  { title: 'Where AI Agents Can Create Immediate Impact', date: 'Aug 2026', category: 'Agentic AI' },
-  { title: 'How to Prioritise Enterprise AI Use Cases', date: 'Jul 2026', category: 'AI Strategy' },
-  { title: 'From SEO to AEO: How Brands Become the Answer', date: 'Jul 2026', category: 'AEO & GEO' },
-  { title: 'Building a Marketing Function for the AI Era', date: 'Jun 2026', category: 'Marketing' },
-  { title: 'Why Marketing Analytics Must Move Beyond Clicks', date: 'Jun 2026', category: 'Analytics' },
-  { title: 'How AI Is Transforming B2B Demand Generation', date: 'May 2026', category: 'Demand Generation' },
-  { title: 'Building Responsible AI Governance', date: 'May 2026', category: 'Governance' },
-  { title: 'How Human and AI Teams Can Work Together', date: 'Apr 2026', category: 'AI Strategy' },
-];
